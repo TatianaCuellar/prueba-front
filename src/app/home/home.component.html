@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row pokemons-container">
+        <div [hidden]="containerPokemon">
+            <div class="col-sm-12">
+                <div class="row button-next" align="center">
+                    <div class="col-sm-6" align="right">
+                        <button (click)="listPokemons(pokemon?.previous)" *ngIf="pokemon?.previous !== null">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 444.819 444.819" style="enable-background:new 0 0 444.819 444.819;" xml:space="preserve"><g transform="matrix(-1 0 0 1 444.819 0)"><g>
+                                        <path d="M352.025,196.712L165.884,10.848C159.029,3.615,150.469,0,140.187,0c-10.282,0-18.842,3.619-25.697,10.848L92.792,32.264   c-7.044,7.043-10.566,15.604-10.566,25.692c0,9.897,3.521,18.56,10.566,25.981l138.753,138.473L92.786,361.168   c-7.042,7.043-10.564,15.604-10.564,25.693c0,9.896,3.521,18.562,10.564,25.98l21.7,21.413   c7.043,7.043,15.612,10.564,25.697,10.564c10.089,0,18.656-3.521,25.697-10.564l186.145-185.864   c7.046-7.423,10.571-16.084,10.571-25.981C362.597,212.321,359.071,203.755,352.025,196.712z" data-original="#000000" class="active-path" fill="#000000"/>
+                                    </g></g> </svg>
+                        </button> 
+                    </div>
+                    <div class="col-sm-6" align="left">
+                        <button (click)="listPokemons(pokemon?.next)"  *ngIf="pokemon?.next !== null">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 46.02 46.02" style="enable-background:new 0 0 46.02 46.02;" xml:space="preserve">
+                                <g>
+                                    <g>
+                                        <path d="M14.757,46.02c-1.412,0-2.825-0.521-3.929-1.569c-2.282-2.17-2.373-5.78-0.204-8.063l12.758-13.418L10.637,9.645    C8.46,7.37,8.54,3.76,10.816,1.582c2.277-2.178,5.886-2.097,8.063,0.179l16.505,17.253c2.104,2.2,2.108,5.665,0.013,7.872    L18.893,44.247C17.77,45.424,16.267,46.02,14.757,46.02z"/>
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngFor="let pokemons of pokemon?.results">  
+                <button (click)="listPokemonsID(pokemons?.url)" class="col-sm-6 col-md-3 pokemon">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{pokemons?.name}}</h5>
+                        </div>
+                    </div>   
+                </button>
+            </ng-container> 
+        </div>
+        <div class="col-sm-12 col-md-8 description-pokemon" [hidden]="!containerPokemon">
+          <div class="row">     
+              <div class="col-sm-3 back">
+                <a (click)="back();">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 444.819 444.819" style="enable-background:new 0 0 444.819 444.819;" xml:space="preserve"><g transform="matrix(-1 0 0 1 444.819 0)"><g>
+                                <path d="M352.025,196.712L165.884,10.848C159.029,3.615,150.469,0,140.187,0c-10.282,0-18.842,3.619-25.697,10.848L92.792,32.264   c-7.044,7.043-10.566,15.604-10.566,25.692c0,9.897,3.521,18.56,10.566,25.981l138.753,138.473L92.786,361.168   c-7.042,7.043-10.564,15.604-10.564,25.693c0,9.896,3.521,18.562,10.564,25.98l21.7,21.413   c7.043,7.043,15.612,10.564,25.697,10.564c10.089,0,18.656-3.521,25.697-10.564l186.145-185.864   c7.046-7.423,10.571-16.084,10.571-25.981C362.597,212.321,359.071,203.755,352.025,196.712z" data-original="#000000" class="active-path" fill="#000000"/>
+                            </g></g> </svg>
+                </a>
+              </div>  
+              <div class="col-sm-8">
+                    <div class="name-pokemon"><img src="{{descriptionPokemon?.sprites.back_default}}" alt="">{{descriptionPokemon.name}} </div>
+              </div>      
+                <div class="col-md-6 description">
+                    <!--abilities-->   
+                    <div class="title">Abilities</div>
+                    <b>Name:</b> 
+                    <div class="descriptions-pokemon" *ngFor="let ability of abilities">
+                      {{ability?.ability.name}}
+                    </div>
+                    <!--Forms-->
+                    <div class="title">Forms</div>
+                    <b>Name:</b>  
+                    <div *ngFor="let forms of forms">
+                        {{forms?.name}}
+                    </div>
+                    <!--Species-->
+                    <div class="title">Species</div>
+                    <b>Name:</b>  
+                    <div>
+                        {{species?.name}}
+                    </div>                    
+                </div>
+                <div class="col-md-6 description">
+                    <div class="title">Types</div>
+                    <b>Name:</b> 
+                    <div>
+                         {{descriptionPokemon?.types.type.name}}
+                    </div>
+                    <div class="row cont-weight">
+                        <div class="col-sm-4 p-0" *ngIf="descriptionPokemon?.height !== null">
+                            <!--Height-->
+                            <b>Height: </b> {{descriptionPokemon?.height}}
+                        </div>
+                        <div class="col-sm-4 p-0" align="left">
+                            <!--weight-->
+                            <b>weight: </b> {{descriptionPokemon?.weight}}
+                        </div>
+                    </div>
+                    <!--Stats-->
+                    <div class="title">Stats</div>
+                    <b>Name:</b>  
+                    <div *ngFor="let stat of stats">
+                            {{stat?.stat.name}}
+                    </div>
+                    <!--Moves-->
+                    <!--<div class="title">Moves</div>
+                    <div><b>Name:</b></div>
+                    <div *ngFor="let move of moves">                        
+                        <div class="row">
+                            <div class="col-sm-4 name-move"> {{move.move.name}}</div>
+                            <div class="col-sm-8">
+                                    <div><b>version group:</b>
+                                    <div *ngFor="let detailMovies of move?.version_group_details">
+                                        -{{detailMovies?.version_group.name}}</div>                              
+                                    </div>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
